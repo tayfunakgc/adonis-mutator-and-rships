@@ -1,4 +1,4 @@
-## Model Realtions without FK & Basic Mutator Usage
+## Model Relationships without FK & Basic Mutator Usage
 
 ## Running app
 
@@ -10,3 +10,4 @@
 
 ## Note
 1. To parse sub json string use "Mutators" in "app/Models/Test.js" (lines from 8 to 10)
+2. Car and owner migration file dont inlude Foreign key. In "app/Models/Owner.js" check "cars" function & in "app/Models/Car.js" check "owner" function

@@ -52,11 +52,9 @@ Route.get('/tests', async ({response}) => {
 
 Route.get('/tests', async ({response}) => {
     const tests = await Test.all();
-    
-    response.send({
-        ...tests.toJSON()
-    });
+    response.send(tests);
 });
+
 
 Route.get('/json', async ({response}) => {
     const config = {
