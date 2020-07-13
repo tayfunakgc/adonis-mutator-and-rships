@@ -32,6 +32,11 @@ Route.get('/cars', async ({response}) => {
     response.send(cars);
 });
 
+Route.get('/cars-with-owner', async ({response}) => {
+    const cars = await Car.query().with('owner').fetch();
+    response.send(cars);
+});
+
 Route.get('/tests', async ({response}) => {
     const tests = await Test.all();
     response.send(tests);
