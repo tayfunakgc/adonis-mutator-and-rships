@@ -31,30 +31,11 @@ Route.get('/cars', async ({response}) => {
     const cars = await Car.all();
     response.send(cars);
 });
-/*
-//* With Default Serializer
-Route.get('/tests', async ({response}) => {
-    const tests = await Test.query().select('id', 'config').fetch();
-    const jsonTest = tests.toJSON();
-    const parsed = []
-    for(let i=0; i<jsonTest.length; i++) {
-        const current = {
-            id: jsonTest[i].id,
-            config: JSON.parse(jsonTest[i].config)
-        }
-        parsed.push(current);
-    }
-    //const parsedTest = JSON.parse(jsonTest);
-    response.send(parsed);
-});
-
-*/
 
 Route.get('/tests', async ({response}) => {
     const tests = await Test.all();
     response.send(tests);
 });
-
 
 Route.get('/json', async ({response}) => {
     const config = {
