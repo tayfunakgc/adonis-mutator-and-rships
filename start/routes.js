@@ -62,3 +62,19 @@ Route.get('/json', async ({response}) => {
     ]
     response.send(configs);
 });
+
+const PaginateModel = use('App/Models/Paginate');
+Route.get('/paginates', async ({request, response}) => {
+    //* For selecting all data without paginate
+    /*
+    const paginate_data = await Paginate.all();
+    console.log(paginate_data.toJSON().length);
+    response.send(paginate_data);
+    */
+    //* With paginating
+    const page = request.input('page');
+    console.log('PAGE = ', page);
+    //response.send('yeaa')
+    const paginate_data = await PaginateModel.query().paginate(page, 10);
+    response.send(paginate_data);
+});
