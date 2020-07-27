@@ -90,5 +90,17 @@ module.exports = {
     scheme: 'api',
     uid: 'email',
     password: 'password'
-  }
+  },
+
+  //* Custom JWT Auth Configuration
+  custom_jwt: {
+    serializer: 'lucid',
+    model: 'App/Models/CustomJwt',
+    scheme: 'jwt',
+    uid: 'custom_username',
+    password: 'custom_password',
+    options: {
+      secret: Env.get('APP_KEY')
+    }
+  },
 }

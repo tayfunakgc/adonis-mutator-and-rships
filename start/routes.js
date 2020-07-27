@@ -1,5 +1,7 @@
 'use strict'
 
+const { remove } = require('@adonisjs/framework/src/Route/Store');
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -77,4 +79,31 @@ Route.get('/paginates', async ({request, response}) => {
     //response.send('yeaa')
     const paginate_data = await PaginateModel.query().paginate(page, 10);
     response.send(paginate_data);
+});
+
+Route.get('custom-login', async ({auth, response}) => {
+    const token = await auth.authenticator('custom_jwt')
+        .generate({id:1, custom_username: 'username1', custom_password: 'password1'}, {custom_username: 'username1'});
+    response.send(token);
+})//.middleware(['auth:custom_jwt'])
+
+Route.get('get-user', async ({auth, response}) => {
+    const user = await auth.getUser();
+    response.send(user);
+}).middleware('auth:custom_jwt');
+
+Route.get('owners-car', async ({response}) => {
+    const owners = await Owner.query().with('many_cars').fetch();
+    response.send(owners);
+});
+
+Route.get('cars-owner', async ({response}) => {
+    const cars = await Car.query().with('many_users').fetch();
+    response.send(cars);
+})
+const OwnerCar = use('App/Models/OwnerCar');
+Route.get('del-owners-car', async ({response}) => {
+    const removed = await OwnerCar.query().where('owner_id', 1).where('car_id', 1).delete();
+    console.log(removed);
+    response.send(removed);
 });

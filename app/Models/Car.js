@@ -9,6 +9,12 @@ class Car extends Model {
         return this.belongsTo('App/Models/Owner');
     }
 
+    many_users () {
+        return this
+            .belongsToMany('App/Models/Owner')
+            .pivotTable('car_owners');
+    }
+
 }
 
 module.exports = Car
